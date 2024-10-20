@@ -11,8 +11,8 @@ import seaborn as sns  # Added for visualizations
 # Load and preprocess the data
 @st.cache_data  # Updated for newer Streamlit versions
 def load_data():
-    # Ensure the file path is correct
-    data = pd.read_csv(r'C:\Users\Hp\Documents\Academy\Project\Work\customer_churn_dataa.csv')  # Replace with the path to your dataset
+    # Use a relative path to the CSV file
+    data = pd.read_csv('customer_churn_dataa.csv')  # Ensure the file is in the same directory as this script
     data['subscription_end_date'] = pd.to_datetime(data['subscription_end_date'])
     data['subscription_start_date'] = pd.to_datetime(data['subscription_start_date'])
     data['days_spent'] = (data['subscription_end_date'] - data['subscription_start_date']).dt.days
@@ -237,5 +237,3 @@ with tab3:
 
     # Display the pie chart in Streamlit
     st.pyplot(fig)
-
-# ... existing code continues ...
