@@ -64,9 +64,9 @@ tab1, tab2, tab3 = st.tabs(["Churn Prediction", "Data Summary", "Visualizations"
 with tab1:
     st.subheader("Customer Churn Prediction Tool")
     
-    days_spent = st.number_input('Days Spent', min_value=0, max_value=365, value=0, step=1)
-    customer_support_tickets = st.number_input('Customer Support Tickets', min_value=0, max_value=100, value=0, step=1)
-    total_spend = st.number_input('Total Spend ($)', min_value=0.0, max_value=10000.0, value=0.0, step=1.0)
+    days_spent = st.number_input('Days Spent', min_value=0, max_value=1000, value=0, step=1)
+    customer_support_tickets = st.number_input('Customer Support Tickets', min_value=0, max_value=200, value=0, step=1)
+    total_spend = st.number_input('Total Spend ($)', min_value=0.0, max_value=100000.0, value=0.0, step=1.0)
     location = st.selectbox('Location', ['Rural', 'Urban', 'Suburban'])
     age = st.number_input('Age', min_value=18, max_value=100, value=25, step=1)
     gender = st.selectbox('Gender', ['Male', 'Female'])
