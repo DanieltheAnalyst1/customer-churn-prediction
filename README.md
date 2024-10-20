@@ -1,13 +1,12 @@
-### GitHub Repository Documentation: Customer Churn Prediction Dashboard
-
 ---
 
 # Customer Churn Prediction Dashboard
 
-This project provides a **Customer Churn Prediction Tool** built using **Streamlit**, a user-friendly web interface for machine learning models. The dashboard leverages **Random Forest Classifier** to predict customer churn based on various input factors such as `days_spent`, `total_spend`, `age`, `gender`, and `location`.
+This project provides a **Customer Churn Prediction Tool** built using **Streamlit**, a user-friendly web interface for machine learning models. The dashboard leverages a **Random Forest Classifier** to predict customer churn based on various input factors such as `days_spent`, `total_spend`, `age`, `gender`, and `location`.
 
 ### Table of Contents
 - [Overview](#overview)
+- [Live Demo](#live-demo)
 - [Features](#features)
 - [Project Structure](#project-structure)
 - [Installation](#installation)
@@ -22,6 +21,14 @@ This project provides a **Customer Churn Prediction Tool** built using **Streaml
 ## Overview
 
 Customer churn prediction is essential for businesses aiming to retain customers and maintain growth. This dashboard allows users to input specific customer data, and it predicts whether the customer is likely to churn. The project also includes data summaries and visualizations to help decision-makers understand factors related to customer churn.
+
+For a quick overview and to interact with the tool, check out the **live demo** linked below.
+
+---
+
+## Live Demo
+
+Explore the deployed Customer Churn Prediction Dashboard [here](https://customer-churn-prediction-bdb7vappbwxqlbndynb5qhd.streamlit.app/).
 
 ---
 
@@ -100,6 +107,8 @@ The user-friendly interface lets users input customer data, check summaries, and
     ```
 
 3. The dashboard should now be accessible at `http://localhost:8501/`. You can input customer data and check predictions, view summary statistics, and explore visualizations.
+
+Alternatively, you can directly access the deployed version [here](https://customer-churn-prediction-bdb7vappbwxqlbndynb5qhd.streamlit.app/).
 
 ---
 
