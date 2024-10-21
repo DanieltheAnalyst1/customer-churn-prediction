@@ -111,9 +111,13 @@ with tab2:
         "customer_support_tickets": ['mean', 'min', 'max'],
         "total_spend": ['sum', 'min', 'max', 'mean']
     })
-    
     st.write("Data Summary Based on Churned Customers:")
     st.dataframe(summary_df)
+
+    st.subheader("Number of High-risk Customers")
+    churn_prob = model.predict_proba(X_test)[:, 1]
+    high_risk_customers = X_test[churn_prob > 0.7]
+    st.write("Number of customers with a churn probability greater than 70%:", len(high_risk_customers))
     
     churn_location = data.groupby(['location', 'churned']).size().reset_index(name='count')
     st.subheader("Churn by Location")
