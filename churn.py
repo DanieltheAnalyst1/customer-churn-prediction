@@ -20,7 +20,6 @@ def preprocess_data(data):
     if 'gender' not in data.columns or 'location' not in data.columns: 
         raise ValueError("Required columns are missing from the data.")
     
-
     data['gender'] = LabelEncoder().fit_transform(data['gender'])
     
     location_mapping = {'Rural': 0, 'Urban': 1, 'Suburban': 2}
@@ -107,43 +106,18 @@ with tab1:
 with tab2:
     st.subheader("Summary Tables")
 
-    Ndays_spend = data.groupby(["churned"]).count()[["days_spent"]]
-    Adays_spend = data.groupby("churned")["days_spent"].mean()
-    Mindays_spend = data.groupby("churned")["days_spent"].min()
-    Maxdays_spend = data.groupby("churned")["days_spent"].max()
-    Maxsupport = data.groupby("churned")["customer_support_tickets"].max()
-    Minsupport = data.groupby("churned")["customer_support_tickets"].min()
-    AvgSupport = data.groupby("churned")["customer_support_tickets"].mean()
-    Tspend = data.groupby("churned")["total_spend"].sum()
-    Minspend = data.groupby("churned")["total_spend"].min()
-    Maxspend = data.groupby("churned")["total_spend"].max()
-    Aspend = data.groupby("churned")["total_spend"].mean()
+    summary_df = data.groupby("churned").agg({
+        "days_spent": ['count', 'mean', 'min', 'max'],
+        "customer_support_tickets": ['mean', 'min', 'max'],
+        "total_spend": ['sum', 'min', 'max', 'mean']
+    })
+    
+    st.write("Data Summary Based on Churned Customers:")
+    st.dataframe(summary_df)
+    
     churn_location = data.groupby(['location', 'churned']).size().reset_index(name='count')
-
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.subheader("Days Spent Summary")
-        st.write("Number of Days:", Ndays_spend)
-        st.write("Average Days:", Adays_spend)
-        st.write("Minimum Days:", Mindays_spend)
-        st.write("Maximum Days:", Maxdays_spend)
-
-    with col2:
-        st.subheader("Support Tickets Summary")
-        st.write("Max Support Tickets:", Maxsupport)
-        st.write("Min Support Tickets:", Minsupport)
-        st.write("Average Support Tickets:", AvgSupport)
-
-    with col3:
-        st.subheader("Spending Summary")
-        st.write("Total Spend:", Tspend)
-        st.write("Minimum Spend:", Minspend)
-        st.write("Maximum Spend:", Maxspend)
-        st.write("Average Spend:", Aspend)
-
     st.subheader("Churn by Location")
-    st.write(churn_location)
+    st.dataframe(churn_location)
 
 with tab3:
     st.subheader("Advanced Visualizations")
