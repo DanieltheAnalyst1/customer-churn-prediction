@@ -118,6 +118,16 @@ with tab2:
     churn_location = data.groupby(['location', 'churned']).size().reset_index(name='count')
     st.subheader("Churn by Location")
     st.dataframe(churn_location)
+    
+    latest_date = data['subscription_end_date'].max()
+    six_months_ago = latest_date - pd.DateOffset(months=6)
+    
+    churned_last_6_months = data[(data['churned'] == 1) & (data['subscription_end_date'] >= six_months_ago)]
+    num_churned_last_6_months = len(churned_last_6_months)
+    
+    st.subheader("Churned Customers in the Last 6 Months")
+    st.write(f"Number of customers who churned in the last 6 months: **{num_churned_last_6_months}**")
+    st.dataframe(churned_last_6_months[['customer_id', 'subscription_end_date', 'days_spent', 'total_spend', 'customer_support_tickets']])
 
 with tab3:
     st.subheader("Advanced Visualizations")
@@ -181,7 +191,4 @@ with tab3:
 
     st.subheader("Actionable Strategies to Retain Customers")
     st.write("""
-        - **Targeted Promotions**: Offer discounts or loyalty rewards to customers in high churn segments (e.g., customers in Urban areas or with high customer support tickets).
-        - **Improved Customer Support**: Prioritize outreach to customers with many support tickets to resolve their issues faster.
-        - **Tailored Engagement**: Provide personalized offers or incentives to customers with low total spend and high churn probability.
-    """)
+        - **Targeted Promotions**: Offer discounts or loyalty rewards to customers in
