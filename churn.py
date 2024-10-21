@@ -149,8 +149,7 @@ with tab3:
     st.subheader("Advanced Visualizations")
 
     st.subheader("Feature Correlation Heatmap")
-    corr_matrix = data.select_dtypes(include=[np.number]).corr() 
-
+    corr_matrix = data.select_dtypes(include=[np.number]).corr()  
     fig, ax = plt.subplots()
     sns.heatmap(corr_matrix, annot=True, fmt='.2f', cmap='coolwarm', ax=ax)
     st.pyplot(fig)
@@ -169,7 +168,6 @@ with tab3:
 
     st.subheader("Churn Probability by Gender")
     churn_by_gender = data.groupby('gender')['churned'].mean()
-
     fig, ax = plt.subplots()
     sns.barplot(x=churn_by_gender.index, y=churn_by_gender.values, ax=ax)
     ax.set_title("Churn Probability by Gender")
@@ -177,18 +175,16 @@ with tab3:
 
     st.subheader("Churn Probability by Location")
     churn_by_location = data.groupby('location')['churned'].mean()
-
     fig, ax = plt.subplots()
     sns.barplot(x=churn_by_location.index, y=churn_by_location.values, ax=ax)
     ax.set_title("Churn Probability by Location")
     st.pyplot(fig)
 
     st.subheader("Churn Rate by Location")
-  
     labels = ['Urban', 'Rural', 'Suburban']
-    sizes = [45, 30, 25]  
-    colors = ['#ff9999', '#66b3ff', '#99ff99']  
-    explode = (0.1, 0, 0)  
+    sizes = [45, 30, 25] 
+    colors = ['#ff9999', '#66b3ff', '#99ff99']
+    explode = (0.1, 0, 0)
 
     fig, ax = plt.subplots()
     ax.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', 
@@ -197,5 +193,21 @@ with tab3:
 
     ax.axis('equal')
     plt.title('Churn Rate by Location', fontsize=14, fontweight='bold')
-
     st.pyplot(fig)
+
+    st.subheader("Churn Prediction Results")
+    churn_prob = model.predict_proba(X_test)[:, 1]
+    fig, ax = plt.subplots()
+    sns.histplot(churn_prob, bins=20, kde=True, ax=ax)
+    ax.set_title("Predicted Churn Probability Distribution")
+    st.pyplot(fig)
+    
+    high_risk_customers = X_test[churn_prob > 0.7]
+    st.write("Number of high-risk customers:", len(high_risk_customers))
+
+    st.subheader("Actionable Strategies to Retain Customers")
+    st.write("""
+        - **Targeted Promotions**: Offer discounts or loyalty rewards to customers in high churn segments (e.g., customers in Urban areas or with high customer support tickets).
+        - **Improved Customer Support**: Prioritize outreach to customers with many support tickets to resolve their issues faster.
+        - **Tailored Engagement**: Provide personalized offers or incentives to customers with low total spend and high churn probability.
+    """)
