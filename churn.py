@@ -169,6 +169,7 @@ with tab3:
     plt.title('Churn Rate by Location', fontsize=14, fontweight='bold')
     st.pyplot(fig)
 
+    churn_prob = model.predict_proba(X_test)[:, 1]
     high_risk_customers = X_test[churn_prob > 0.7]
     st.write("Number of high-risk customers:", len(high_risk_customers))
 
