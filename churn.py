@@ -191,4 +191,7 @@ with tab3:
 
     st.subheader("Actionable Strategies to Retain Customers")
     st.write("""
-        - **Targeted Promotions**: Offer discounts or loyalty rewards to customers in
+        - **Targeted Promotions**: Offer discounts or loyalty rewards to customers in high churn segments (e.g., customers in Urban areas or with high customer support tickets).
+        - **Improved Customer Support**: Prioritize outreach to customers with many support tickets to resolve their issues faster.
+        - **Tailored Engagement**: Provide personalized offers or incentives to customers with low total spend and high churn probability.
+    """)
