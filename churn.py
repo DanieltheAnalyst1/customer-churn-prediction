@@ -169,12 +169,6 @@ with tab3:
     plt.title('Churn Rate by Location', fontsize=14, fontweight='bold')
     st.pyplot(fig)
 
-    st.subheader("Churn Prediction Results")
-    churn_prob = model.predict_proba(X_test)[:, 1]
-    fig, ax = plt.subplots()
-    sns.histplot(churn_prob, bins=20, kde=True, ax=ax)
-    ax.set_title("Predicted Churn Probability Distribution")
-    st.pyplot(fig)
     
     high_risk_customers = X_test[churn_prob > 0.7]
     st.write("Number of high-risk customers:", len(high_risk_customers))
