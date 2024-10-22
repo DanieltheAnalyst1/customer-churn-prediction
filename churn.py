@@ -142,12 +142,14 @@ with tab3:
 
     fig, ax = plt.subplots()
     sns.histplot(data=data, x='total_spend', hue='churned', kde=True, ax=ax)
-    ax.set_title("Total Amount Spent by Customer Distribution by Churn Status")
+    ax.set_title("Total Amount Spent Distribution by Churn Status")
+    ax.set_xlabel("Total Spend by Customer ($)") 
     st.pyplot(fig)
 
     fig, ax = plt.subplots()
-    sns.histplot(data=data, x='age', hue='churned', kde=True, ax=ax)
+    sns.histplot(data=data, x='age', hue='churned', kde=True, ax=ax, palette={True: 'red', False: 'blue'})
     ax.set_title("Age of Customer Distribution by Churn Status")
+    ax.set_xlabel("Age of Customer") 
     st.pyplot(fig)
 
     st.subheader("Churn Probability by Gender")
