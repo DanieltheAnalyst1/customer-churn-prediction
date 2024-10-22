@@ -141,7 +141,7 @@ with tab3:
     st.pyplot(fig)
 
     fig, ax = plt.subplots()
-    sns.histplot(data=data, x='age', hue='churned', kde=True, ax=ax, palette={True: 'red', False: 'blue'})
+    sns.histplot(data=data, x='age', hue='churned', kde=True, ax=ax)
     ax.set_title("Age of Customer Distribution by Churn Status")
     ax.set_xlabel("Age of Customer")
     st.pyplot(fig)
