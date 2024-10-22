@@ -150,7 +150,6 @@ with tab3:
     ax.set_title("Age of Customer Distribution by Churn Status")
     st.pyplot(fig)
 
-    # Churn Probability by Gender
     st.subheader("Churn Probability by Gender")
     churn_by_gender = data.groupby('gender')['churned'].mean().reset_index()
 
@@ -162,11 +161,9 @@ with tab3:
     ax.set_xticklabels(['Male', 'Female'])
     st.pyplot(fig)
 
-    # Churn Probability by Location
     st.subheader("Churn Probability by Location")
     churn_by_location = data.groupby('location')['churned'].mean().reset_index()
 
-    # Using the same colors as the "Churn Rate by Location" chart
     colors = ['#ff9999', '#66b3ff', '#99ff99']
     fig, ax = plt.subplots()
     sns.barplot(x='location', y='churned', data=churn_by_location, palette=colors, ax=ax)
@@ -176,6 +173,21 @@ with tab3:
     ax.set_xticklabels(['Rural', 'Urban', 'Suburban'])
     st.pyplot(fig)
 
+    st.subheader("Churn Rate by Location")
+    labels = ['Urban', 'Rural', 'Suburban']
+    sizes = [45, 30, 25] 
+    colors = ['#ff9999', '#66b3ff', '#99ff99']
+    explode = (0.1, 0, 0)
+
+    fig, ax = plt.subplots()
+    ax.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%', 
+           startangle=90, colors=colors, shadow=True, 
+           wedgeprops={'edgecolor': 'black'}, textprops={'fontsize': 12})
+
+    ax.axis('equal')
+    plt.title('Churn Rate by Location', fontsize=14, fontweight='bold')
+    st.pyplot(fig)
+    
     churn_prob = model.predict_proba(X_test)[:, 1]
     high_risk_customers = X_test[churn_prob > 0.7]
     st.write("Number of high-risk customers:", len(high_risk_customers))
